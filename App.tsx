@@ -20,6 +20,9 @@ import SecurityAI from './components/SecurityAI';
 import CreatorLab from './components/CreatorLab';
 import ProfileModule from './components/ProfileModule';
 import ExequielaAI from './components/ExequielaAI';
+import Calculator from './components/Calculator';
+import NetworkHub from './components/NetworkHub';
+import GlobalEventsOverlay from './components/GlobalEventsOverlay';
 import { Bell, ShieldCheck, Search, Zap, X as XIcon, DollarSign, BadgeCheck, Menu, Bot, Power, Languages, Globe, Check } from 'lucide-react';
 
 const INITIAL_USER: User = {
@@ -51,47 +54,47 @@ const DEFAULT_LOGO = "https://i.postimg.cc/85zKzQ4Z/XF-LOGO-CUSTOM.png";
 
 const DICTIONARY: Record<Language, Record<string, string>> = {
   es: {
-    nav_feed: 'Feed Social', nav_create: 'Crear', nav_videos: 'Videos & Shorts', nav_cine: 'Cine XF', nav_live: 'Directos Live', nav_games: 'Emulador Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Citas Sugar', nav_market: 'Ventas de Comida', nav_jobs: 'Trabajo Online', nav_messages: 'Mensajes', nav_profile: 'Perfil', nav_admin: 'Admin Panel', nav_translator: 'Traductor',
+    nav_feed: 'Feed Social', nav_create: 'Crear', nav_videos: 'Videos & Shorts', nav_cine: 'Cine XF', nav_live: 'Directos Live', nav_games: 'Emulador Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Citas Sugar', nav_market: 'Ventas de Comida', nav_jobs: 'Trabajo Online', nav_messages: 'Mensajes', nav_profile: 'Perfil', nav_admin: 'Admin Panel', nav_translator: 'Traductor', nav_calculator: 'Calculadora', nav_network: 'Red & WiFi',
     header_perfil: 'PERFIL', header_asistente: 'ACOMPAÑANTE', modal_trans_title: 'SISTEMA TRADUCTOR MULTIVERSAL', modal_trans_subtitle: 'SELECCIONA TU IDIOMA PARA LA RED', footer_secure: 'Sistema Protegido por IA Aura'
   },
   en: {
-    nav_feed: 'Social Feed', nav_create: 'Create', nav_videos: 'Videos & Shorts', nav_cine: 'XF Cinema', nav_live: 'Live Streams', nav_games: 'Gamer Emulator', nav_gps: 'GPS System', nav_dating: 'Sugar Dating', nav_market: 'Food Sales', nav_jobs: 'Online Work', nav_messages: 'Messages', nav_profile: 'Profile', nav_admin: 'Admin Panel', nav_translator: 'Translator',
+    nav_feed: 'Social Feed', nav_create: 'Create', nav_videos: 'Videos & Shorts', nav_cine: 'XF Cinema', nav_live: 'Live Streams', nav_games: 'Gamer Emulator', nav_gps: 'GPS System', nav_dating: 'Sugar Dating', nav_market: 'Food Sales', nav_jobs: 'Online Work', nav_messages: 'Messages', nav_profile: 'Profile', nav_admin: 'Admin Panel', nav_translator: 'Translator', nav_calculator: 'Calculator', nav_network: 'Network & WiFi',
     header_perfil: 'PROFILE', header_asistente: 'ASSISTANT', modal_trans_title: 'MULTIVERSAL TRANSLATOR SYSTEM', modal_trans_subtitle: 'SELECT YOUR LANGUAGE FOR THE NETWORK', footer_secure: 'Protected by AI Aura System'
   },
   pt: {
-    nav_feed: 'Feed Social', nav_create: 'Criar', nav_videos: 'Vídeos & Curtas', nav_cine: 'Cine XF', nav_live: 'Ao Vivo', nav_games: 'Emulador Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Encontros Sugar', nav_market: 'Vendas de Comida', nav_jobs: 'Trabalho Online', nav_messages: 'Mensagens', nav_profile: 'Perfil', nav_admin: 'Painel Admin', nav_translator: 'Tradutor',
+    nav_feed: 'Feed Social', nav_create: 'Criar', nav_videos: 'Vídeos & Curtas', nav_cine: 'Cine XF', nav_live: 'Ao Vivo', nav_games: 'Emulador Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Encontros Sugar', nav_market: 'Vendas de Comida', nav_jobs: 'Trabalho Online', nav_messages: 'Mensagens', nav_profile: 'Perfil', nav_admin: 'Painel Admin', nav_translator: 'Tradutor', nav_calculator: 'Calculadora', nav_network: 'Rede & WiFi',
     header_perfil: 'PERFIL', header_asistente: 'ACOMPANHANTE', modal_trans_title: 'SISTEMA DE TRADUÇÃO MULTIVERSAL', modal_trans_subtitle: 'SELECIONE SEU IDIOMA PARA A REDE', footer_secure: 'Sistema Protegido por IA Aura'
   },
   fr: {
-    nav_feed: 'Fil Social', nav_create: 'Créer', nav_videos: 'Vidéos & Shorts', nav_cine: 'Ciné XF', nav_live: 'Direct Live', nav_games: 'Émulateur Gamer', nav_gps: 'Système GPS', nav_dating: 'Rencontres Sugar', nav_market: 'Vente de Nourriture', nav_jobs: 'Travail en Ligne', nav_messages: 'Messages', nav_profile: 'Profil', nav_admin: 'Panneau Admin', nav_translator: 'Traducteur',
-    header_perfil: 'PROFIL', header_asistente: 'COMPAGNON', modal_trans_title: 'SYSTÈME DE TRADUCTION MULTIVERSAL', modal_trans_subtitle: 'SÉLECTIONNEZ VOTRE LANGUE POUR LE RÉSEAU', footer_secure: 'Système protégé par l\'IA Aura'
+    nav_feed: 'Fil Social', nav_create: 'Créer', nav_videos: 'Vidéos & Shorts', nav_cine: 'Ciné XF', nav_live: 'Direct Live', nav_games: 'Émulateur Gamer', nav_gps: 'Système GPS', nav_dating: 'Rencontres Sugar', nav_market: 'Vente de Nourriture', nav_jobs: 'Travail en Ligne', nav_messages: 'Messages', nav_profile: 'Profil', nav_admin: 'Panneau Admin', nav_translator: 'Traducteur', nav_calculator: 'Calculatrice', nav_network: 'Réseau & WiFi',
+    header_perfil: 'PROFIL', header_asistente: 'COMPAGNON', modal_trans_title: 'SYSTÈME DE TRADUÇÃO MULTIVERSAL', modal_trans_subtitle: 'SÉLECTIONNEZ VOTRE LANGUE POUR LE RÉSEAU', footer_secure: 'Système protégé por l\'IA Aura'
   },
   ru: {
-    nav_feed: 'Лента', nav_create: 'Создать', nav_videos: 'Видео', nav_cine: 'Кино XF', nav_live: 'Прямой эфир', nav_games: 'Эмулятор', nav_gps: 'Система GPS', nav_dating: 'Знакомства', nav_market: 'Еда', nav_jobs: 'Работа онлайн', nav_messages: 'Сообщения', nav_profile: 'Профиль', nav_admin: 'Админ панель', nav_translator: 'Переводчик',
+    nav_feed: 'Лента', nav_create: 'Создать', nav_videos: 'Видео', nav_cine: 'Кино XF', nav_live: 'Прямой эфир', nav_games: 'Эмулятор', nav_gps: 'Система GPS', nav_dating: 'Знакомства', nav_market: 'Еда', nav_jobs: 'Работа онлайн', nav_messages: 'Сообщения', nav_profile: 'Профиль', nav_admin: 'Админ панель', nav_translator: 'Переводчик', nav_calculator: 'Калькулятор', nav_network: 'Сеть и WiFi',
     header_perfil: 'ПРОФИЛЬ', header_asistente: 'ПОМОЩНИК', modal_trans_title: 'МУЛЬТИВЕРСАЛЬНАЯ СИСТЕМА ПЕРЕВОДА', modal_trans_subtitle: 'ВЫБЕРИТЕ ЯЗЫК ДЛЯ СЕТИ', footer_secure: 'Система защищена ИИ Аура'
   },
   zh: {
-    nav_feed: '社交动态', nav_create: '创建', nav_videos: '短视频', nav_cine: 'XF影院', nav_live: '直播', nav_games: '游戏模拟器', nav_gps: 'GPS系统', nav_dating: '约会', nav_market: '美食销售', nav_jobs: '在线工作', nav_messages: '消息', nav_profile: '个人资料', nav_admin: '管理面板', nav_translator: '翻译',
+    nav_feed: '社交动态', nav_create: '创建', nav_videos: '短视频', nav_cine: 'XF影院', nav_live: '直播', nav_games: '游戏模拟器', nav_gps: 'GPS系统', nav_dating: '约会', nav_market: '美食销售', nav_jobs: '在线工作', nav_messages: '消息', nav_profile: '个人资料', nav_admin: '管理面板', nav_translator: '翻译', nav_calculator: '计算器', nav_network: '网络和WiFi',
     header_perfil: '个人资料', header_asistente: '助理', modal_trans_title: '多维翻译系统', modal_trans_subtitle: '选择您的语言', footer_secure: 'Aura AI 保护系统'
   },
   ar: {
-    nav_feed: 'التغذية الاجتماعية', nav_create: 'إنشاء', nav_videos: 'فيديوهات قصيرة', nav_cine: 'سينما XF', nav_live: 'بث مباشر', nav_games: 'محاكي الألعاب', nav_gps: 'نظام GPS', nav_dating: 'مواعدة', nav_market: 'مبيعات الطعام', nav_jobs: 'عمل عبر الإنترنت', nav_messages: 'رسائل', nav_profile: 'الملف الشخصي', nav_admin: 'لوحة الإدارة', nav_translator: 'مترجم',
+    nav_feed: 'التغذية الاجتماعية', nav_create: 'إنشاء', nav_videos: 'فيديوهات قصيرة', nav_cine: 'سينما XF', nav_live: 'بث مباشر', nav_games: 'محاكي الألعاب', nav_gps: 'نظام GPS', nav_dating: 'مواعدة', nav_market: 'مبيعات الطعام', nav_jobs: 'عمل عبر الإنترنت', nav_messages: 'رسائل', nav_profile: 'الملف الشخصi', nav_admin: 'لوحة الإدارة', nav_translator: 'مترجم', nav_calculator: 'حاسبة', nav_network: 'الشبكة و WiFi',
     header_perfil: 'الملف الشخصي', header_asistente: 'مرافق', modal_trans_title: 'نظام المترجم العالمي', modal_trans_subtitle: 'اختر لغتك للشبكة', footer_secure: 'نظام محمي بواسطة Aura AI'
   },
   hi: {
-    nav_feed: 'सोशल फीड', nav_create: 'बनाएं', nav_videos: 'वीडियो और शॉर्ट्स', nav_cine: 'XF सिनेमा', nav_live: 'लाइव स्ट्रीम', nav_games: 'गेमर एमुलेटर', nav_gps: 'जीपीएस सिस्टम', nav_dating: 'डेटिंग', nav_market: 'भोजन बिक्री', nav_jobs: 'ऑनलाइन काम', nav_messages: 'संदेश', nav_profile: 'प्रोफ़ाइल', nav_admin: 'एडमिन पैनल', nav_translator: 'अनुवादक',
+    nav_feed: 'सोशल फीड', nav_create: 'बनाएं', nav_videos: 'वीडियो और शॉर्ट्स', nav_cine: 'XF सिनेमा', nav_live: 'लाइव स्ट्रीम', nav_games: 'गेमर एमुलेटर', nav_gps: 'जीपीएस सिस्टम', nav_dating: 'डेटING', nav_market: 'भोजन बिक्री', nav_jobs: 'ऑनलाइन काम', nav_messages: 'संदेश', nav_profile: 'प्रोफ़ाइल', nav_admin: 'एडAdmin पैनल', nav_translator: 'अनुवादक', nav_calculator: 'कैलकुलेटर', nav_network: 'नेटवर्क और वाईफाई',
     header_perfil: 'प्रोफ़ाइल', header_asistente: 'सहायक', modal_trans_title: 'बहुआयामी अनुवादक प्रणाली', modal_trans_subtitle: 'नेटवर्क के लिए अपनी भाषा चुनें', footer_secure: 'ऑरा एआई द्वारा सुरक्षित प्रणाली'
   },
   jp: {
-    nav_feed: 'ソーシャルフィード', nav_create: '作成', nav_videos: 'ビデオとショーツ', nav_cine: 'XFシネマ', nav_live: 'ライブ配信', nav_games: 'エミュレーター', nav_gps: 'GPSシステム', nav_dating: 'デート', nav_market: 'フード販売', nav_jobs: 'オンラインワーク', nav_messages: 'メッセージ', nav_profile: 'プロフィール', nav_admin: '管理パネル', nav_translator: '翻訳者',
+    nav_feed: 'ソーシャルフィード', nav_create: '作成', nav_videos: 'ビデオとショーツ', nav_cine: 'XFシネマ', nav_live: 'ライブ配信', nav_games: 'エミュレーター', nav_gps: 'GPSシステム', nav_dating: 'デート', nav_market: 'フード販売', nav_jobs: 'オンラインワーク', nav_messages: 'メッセージ', nav_profile: 'プロフィール', nav_admin: '管理パネル', nav_translator: '翻訳者', nav_calculator: '電卓', nav_network: 'ネットワークとWiFi',
     header_perfil: 'プロフィール', header_asistente: 'アシスタント', modal_trans_title: 'マルチバーサル翻訳システム', modal_trans_subtitle: 'ネットワークの言語を選択', footer_secure: 'Aura AI保護システム'
   },
   it: {
-    nav_feed: 'Feed Sociale', nav_create: 'Crea', nav_videos: 'Video & Shorts', nav_cine: 'Cinema XF', nav_live: 'Diretta Live', nav_games: 'Emulatore Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Incontri Sugar', nav_market: 'Vendita Cibo', nav_jobs: 'Lavoro Online', nav_messages: 'Messaggi', nav_profile: 'Profilo', nav_admin: 'Pannello Admin', nav_translator: 'Traduttore',
-    header_perfil: 'PROFILO', header_asistente: 'COMPAGNON', modal_trans_title: 'SISTEMA DI TRADUZIONE MULTIVERSAL', modal_trans_subtitle: 'SELEZIONA LA TUA LINGUA', footer_secure: 'Sistema protetto da IA Aura'
+    nav_feed: 'Feed Sociale', nav_create: 'Crea', nav_videos: 'Video & Shorts', nav_cine: 'Cinema XF', nav_live: 'Diretta Live', nav_games: 'Emulatore Gamer', nav_gps: 'Sistema GPS', nav_dating: 'Incontri Sugar', nav_market: 'Vendita Cibo', nav_jobs: 'Lavoro Online', nav_messages: 'Messaggi', nav_profile: 'Profilo', nav_admin: 'Pannello Admin', nav_translator: 'Traduttore', nav_calculator: 'Calcolatrice', nav_network: 'Rete e WiFi',
+    header_perfil: 'PROFILO', header_asistente: 'COMPAGNON', modal_trans_title: 'SISTEMA DI TRADUÇÃO MULTIVERSAL', modal_trans_subtitle: 'SELEZIONA LA TUA LINGUA', footer_secure: 'Sistema protetto da IA Aura'
   },
   de: {
-    nav_feed: 'Social Feed', nav_create: 'Erstellen', nav_videos: 'Videos & Shorts', nav_cine: 'XF Kino', nav_live: 'Live-Streams', nav_games: 'Gamer Emulator', nav_gps: 'GPS-System', nav_dating: 'Sugar Dating', nav_market: 'Lebensmittelverkauf', nav_jobs: 'Online-Arbeit', nav_messages: 'Nachrichten', nav_profile: 'Profil', nav_admin: 'Admin-Panel', nav_translator: 'Übersetzer',
+    nav_feed: 'Social Feed', nav_create: 'Erstellen', nav_videos: 'Videos & Shorts', nav_cine: 'XF Kino', nav_live: 'Live-Streams', nav_games: 'Gamer Emulator', nav_gps: 'GPS-System', nav_dating: 'Sugar Dating', nav_market: 'Lebensmittelverkauf', nav_jobs: 'Online-Arbeit', nav_messages: 'Nachrichten', nav_profile: 'Profil', nav_admin: 'Admin-Panel', nav_translator: 'Übersetzer', nav_calculator: 'Rechner', nav_network: 'Netzwerk & WiFi',
     header_perfil: 'PROFIL', header_asistente: 'ASSISTENT', modal_trans_title: 'MULTIVERSALES ÜBERSETZUNGSSYSTEM', modal_trans_subtitle: 'WÄHLEN SIE IHRE SPRACHE FÜR DAS NETZWERK', footer_secure: 'System geschützt durch Aura AI'
   }
 };
@@ -121,7 +124,13 @@ const App: React.FC = () => {
     const saved = localStorage.getItem('xf_ads');
     return saved ? JSON.parse(saved) : DEFAULT_ADS;
   });
-  const [logoUrl, setLogoUrl] = useState<string>(() => localStorage.getItem('xfletchex_logo') || DEFAULT_LOGO);
+
+  // SISTEMA DE LOGO PERSISTENTE "XF-STICKY"
+  const [logoUrl, setLogoUrl] = useState<string>(() => {
+    const savedLogo = localStorage.getItem('xfletchex_logo');
+    return savedLogo || DEFAULT_LOGO;
+  });
+  
   const [isLogoVisible, setIsLogoVisible] = useState<boolean>(() => localStorage.getItem('xfletchex_logo_visible') !== 'false');
 
   // Sistema de traducción
@@ -144,14 +153,17 @@ const App: React.FC = () => {
     localStorage.setItem('xf_lang', language);
   }, [language]);
 
-  // GUARDADO AUTOMÁTICO DE PUBLICIDAD (SOLICITADO)
+  // GUARDADO AUTOMÁTICO DE PUBLICIDAD
   useEffect(() => {
     localStorage.setItem('xf_ads', JSON.stringify(ads));
   }, [ads]);
 
+  // FUNCIÓN MAESTRA DE LOGO: GUARDA PARA SIEMPRE EN EL DISPOSITIVO
   const handleUpdateLogo = (newUrl: string) => {
     setLogoUrl(newUrl);
     localStorage.setItem('xfletchex_logo', newUrl);
+    // Notificamos un guardado forzado para evitar latencia de estado
+    console.log("XF-IDENTITY: Logo guardado permanentemente en la Red.");
   };
 
   const toggleLogoVisibility = () => {
@@ -199,6 +211,9 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen w-full flex overflow-hidden selection:bg-red-500/30">
       <GalaxyBackground />
+      {/* CAPA GLOBAL DE EVENTOS Y FIESTAS */}
+      <GlobalEventsOverlay />
+      
       {user.assistantEnabled && <ExequielaAI user={user} setUser={setUser} notify={handleNotification} />}
 
       {/* MODAL TRADUCTOR GLOBAL */}
@@ -325,6 +340,8 @@ const App: React.FC = () => {
                 />
               )}
               {activeTab === ViewMode.LIVE && <LiveModule />}
+              {activeTab === ViewMode.CALCULATOR && <Calculator notify={handleNotification} />}
+              {activeTab === ViewMode.NETWORK_HUB && <NetworkHub notify={handleNotification} />}
             </div>
           </div>
         </main>

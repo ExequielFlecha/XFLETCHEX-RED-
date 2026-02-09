@@ -12,7 +12,9 @@ export enum ViewMode {
   GPS = 'gps',
   CINE = 'cine',
   CREATOR_LAB = 'creator_lab',
-  PROFILE = 'profile'
+  PROFILE = 'profile',
+  CALCULATOR = 'calculator',
+  NETWORK_HUB = 'network_hub'
 }
 
 export type Language = 'es' | 'en' | 'pt' | 'fr' | 'ru' | 'zh' | 'ar' | 'hi' | 'jp' | 'it' | 'de';

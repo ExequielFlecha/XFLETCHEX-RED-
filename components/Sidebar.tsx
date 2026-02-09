@@ -3,7 +3,7 @@ import React from 'react';
 import { 
   Home, Video, Heart, Utensils, Briefcase, MessageSquare, 
   Tv, LayoutDashboard, ChevronLeft, ChevronRight, Gamepad2, MapPin, Film,
-  Pencil, User, Languages
+  Pencil, User, Languages, Calculator, Wifi
 } from 'lucide-react';
 import { ViewMode } from '../types';
 
@@ -81,7 +81,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpen, setI
             );
           })}
 
-          {/* NUEVO: BOTÓN TRADUCTOR (FLECHA AMARILLA) */}
           <button
             onClick={onOpenTranslator}
             className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all group relative overflow-hidden text-cyan-400 hover:bg-cyan-400/10 border border-transparent hover:border-cyan-400/20 mt-4`}
@@ -96,6 +95,51 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpen, setI
             {!isOpen && window.innerWidth >= 1024 && (
               <div className="absolute left-full ml-4 px-3 py-2 bg-[#05050a]/90 backdrop-blur-md border border-white/10 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 text-white font-futuristic shadow-2xl">
                 {t('nav_translator')}
+              </div>
+            )}
+          </button>
+
+          <button
+            onClick={() => setActiveTab(ViewMode.CALCULATOR)}
+            className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all group relative overflow-hidden ${
+              activeTab === ViewMode.CALCULATOR 
+                ? 'bg-red-600/20 text-red-500 border border-red-500/30' 
+                : 'text-white/40 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            <Calculator size={22} className="flex-shrink-0 group-hover:rotate-12 transition-transform" />
+            {(isOpen || window.innerWidth < 1024) && (
+              <span className="font-black text-sm whitespace-nowrap font-futuristic tracking-widest uppercase italic">
+                {t('nav_calculator')}
+              </span>
+            )}
+            
+            {!isOpen && window.innerWidth >= 1024 && (
+              <div className="absolute left-full ml-4 px-3 py-2 bg-[#05050a]/90 backdrop-blur-md border border-white/10 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 text-white font-futuristic shadow-2xl">
+                {t('nav_calculator')}
+              </div>
+            )}
+          </button>
+
+          {/* NUEVO: BOTÓN RED & WIFI */}
+          <button
+            onClick={() => setActiveTab(ViewMode.NETWORK_HUB)}
+            className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all group relative overflow-hidden ${
+              activeTab === ViewMode.NETWORK_HUB 
+                ? 'bg-cyan-600/20 text-cyan-400 border border-cyan-400/30 shadow-[0_0_20px_rgba(34,211,238,0.1)]' 
+                : 'text-white/40 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            <Wifi size={22} className={`flex-shrink-0 ${activeTab === ViewMode.NETWORK_HUB ? 'animate-pulse' : ''}`} />
+            {(isOpen || window.innerWidth < 1024) && (
+              <span className="font-black text-sm whitespace-nowrap font-futuristic tracking-widest uppercase italic">
+                {t('nav_network')}
+              </span>
+            )}
+            
+            {!isOpen && window.innerWidth >= 1024 && (
+              <div className="absolute left-full ml-4 px-3 py-2 bg-[#05050a]/90 backdrop-blur-md border border-white/10 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 text-white font-futuristic shadow-2xl">
+                {t('nav_network')}
               </div>
             )}
           </button>

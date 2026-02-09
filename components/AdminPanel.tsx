@@ -64,13 +64,13 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
   const [newAdImage, setNewAdImage] = useState<string | null>(null);
   const [tempNetworkName, setTempNetworkName] = useState(networkName);
 
-  // Estados para Alias de Pago (Lo que pediste devolver)
+  // Estados para Alias de Pago
   const [tempMPAlias, setTempMPAlias] = useState(user.mpAlias || '');
   const [tempPPAlias, setTempPPAlias] = useState(user.ppAlias || '');
 
   const [pendingRehabs, setPendingRehabs] = useState<RehabRequest[]>([]);
 
-  // Estados para edición de publicidad (SOLICITADO)
+  // Estados para edición de publicidad
   const [editingAdId, setEditingAdId] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
 
@@ -114,13 +114,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     notify("¡ALIAS DE PAGO ACTUALIZADOS PARA TODA LA RED!");
   };
 
+  // MANEJADOR DE LOGO REFORZADO: SE GUARDA AL INSTANTE EN LA RED
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        onUpdateLogo(reader.result as string);
-        notify("¡LOGOTIPO XFLETCHAX ACTUALIZADO!");
+        const logoData = reader.result as string;
+        onUpdateLogo(logoData); // Esta función en App.tsx guarda automáticamente en LocalStorage
+        notify("¡LOGOTIPO XFLETCHAX GUARDADO PERMANENTEMENTE!");
       };
       reader.readAsDataURL(file);
     }
@@ -166,7 +168,6 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     notify("PUBLICIDAD ELIMINADA.");
   };
 
-  // FUNCIÓN PARA EDITAR TEXTO (SOLICITADO)
   const startEditAd = (ad: Ad) => {
     setEditingAdId(ad.id);
     setEditText(ad.text);
@@ -260,7 +261,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </div>
       </div>
 
-      {/* SECCIÓN RESTAURADA: CONFIGURACIÓN DE ALIAS DE PAGO (SOLICITADO) */}
+      {/* CONFIGURACIÓN DE ALIAS DE PAGO */}
       <div className="bg-[#05050a] border-2 border-green-600/30 p-10 rounded-[3rem] shadow-2xl space-y-10 relative overflow-hidden group">
          <div className="absolute top-0 right-0 p-10 opacity-5"><Receipt size={200} className="text-green-500" /></div>
          <div className="flex items-center gap-6 relative z-10">
@@ -304,6 +305,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </button>
       </div>
 
+      {/* SECCIÓN DE LOGO: GUARDADO AUTOMÁTICO REFORZADO */}
       <div className="bg-[#05050a] border-2 border-white/5 p-10 rounded-[3rem] shadow-2xl space-y-10">
          <div className="flex items-center gap-6">
             <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
@@ -354,6 +356,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </div>
       </div>
 
+      {/* JUBILACIÓN */}
       <div className="bg-gradient-to-br from-[#05050a] to-[#100a05] border-2 border-orange-600/20 p-10 rounded-[3rem] shadow-2xl space-y-10 relative overflow-hidden group">
          <div className="absolute top-0 right-0 p-10 opacity-5"><Crown size={200} className="text-orange-500" /></div>
          <div className="flex items-center gap-6">
@@ -389,6 +392,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </div>
       </div>
 
+      {/* VOZ IA */}
       <div className="bg-[#05050a] border-2 border-red-600/20 p-10 rounded-[3rem] shadow-2xl space-y-10 relative overflow-hidden group">
          <div className="absolute top-0 right-0 p-10 opacity-5"><Bot size={200} className="text-red-500" /></div>
          <div className="flex items-center gap-6">
@@ -430,6 +434,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </div>
       </div>
 
+      {/* MONETIZACIÓN */}
       <div className="bg-[#050a05] border-2 border-green-500/20 p-10 rounded-[3rem] shadow-2xl relative overflow-hidden group">
          <div className="relative z-10">
             <div className="flex items-center gap-6 mb-10">
@@ -452,6 +457,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
          </div>
       </div>
 
+      {/* PUBLICIDAD */}
       <div className="bg-[#08080c] border-2 border-white/5 p-10 rounded-[3rem] shadow-2xl space-y-8">
         <div className="flex items-center gap-6">
            <div className="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center border border-red-500/30">
