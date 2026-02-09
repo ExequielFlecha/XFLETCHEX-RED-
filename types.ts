@@ -10,8 +10,12 @@ export enum ViewMode {
   LIVE = 'live',
   GAMES = 'games',
   GPS = 'gps',
-  CINE = 'cine'
+  CINE = 'cine',
+  CREATOR_LAB = 'creator_lab',
+  PROFILE = 'profile'
 }
+
+export type Language = 'es' | 'en' | 'pt' | 'fr' | 'ru' | 'zh' | 'ar' | 'hi' | 'jp' | 'it' | 'de';
 
 export enum StrikeStatus {
   CLEAN = 'GREEN',
@@ -40,6 +44,12 @@ export interface User {
   ppAlias?: string;
   heirName?: string;
   isRetired?: boolean;
+  country: string;
+  currency: string;
+  currencySymbol: string;
+  isPrivate?: boolean;
+  assistantEnabled?: boolean;
+  iaVoiceUrl?: string;
   socialLinks?: {
     ig?: string;
     tw?: string;
@@ -57,7 +67,7 @@ export interface Message {
   senderAvatar: string;
   text: string;
   media?: string;
-  type: 'text' | 'image' | 'video' | 'audio' | 'gif' | 'sticker';
+  type: 'text' | 'image' | 'video' | 'audio' | 'gif' | 'sticker' | 'location';
   time: string;
   isRead: boolean;
 }
@@ -105,15 +115,31 @@ export interface Post {
   userBanner?: string;
   content: string;
   media?: string;
-  type: 'image' | 'video' | 'text' | 'music' | 'gif';
+  type: 'image' | 'video' | 'text' | 'music' | 'gif' | 'food_ad';
   likes: number;
   views: number;
   comments: CommentData[];
   isLiked?: boolean;
   isSaved?: boolean;
   isFollowing?: boolean;
+  isPrivate?: boolean;
   music?: string;
   strikeStatus?: StrikeStatus;
+  foodAdData?: {
+    company: string;
+    phone: string;
+    whatsapp: string;
+    telegram: string;
+    price: number;
+    currency: string;
+  };
+}
+
+export interface Ad {
+  id: string;
+  imageUrl: string;
+  text: string;
+  link?: string;
 }
 
 export interface Status {
@@ -133,6 +159,8 @@ export interface Seller {
   businessName: string;
   avatar: string;
   phone: string;
+  whatsapp: string;
+  telegram: string;
   rating: number;
   isVerified: boolean;
 }

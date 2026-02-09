@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XFLETCHEX RED - The Future Is Here</title>
+    <title>XFLETCHAX RED - The Future Is Here</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -47,6 +47,15 @@
             10% { opacity: 1; }
             90% { opacity: 1; }
             100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+        }
+
+        @keyframes scan {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(160px); }
+        }
+
+        .animate-scan {
+            animation: scan 3s infinite linear;
         }
 
         .nebula-glow {
